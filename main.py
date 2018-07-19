@@ -1,10 +1,13 @@
 import shutil
+import os
 from pathlib import Path
 
 checkingImage = input("Enter relative path from .py to Image as base: ")
 pathtosearch = input("Enter path for searching: ")
-dirname = input("Enter directory name: ")
+dirname = input("Enter directory to be created: ")
 
+if not os.path.exists(str(dirname)):
+    os.makedirs(str(dirname))
 
 destdir = Path(str(pathtosearch))
 files = [p for p in destdir.iterdir() if p.is_file()]
@@ -23,12 +26,22 @@ listOfImages = []
 listOfImagesEncoding = []
 for img in files:
     with img.open() as f:
+        error = False
         print(f.name)
 
         unknown_image = face_recognition.load_image_file(str(f.name))
         # unknown_image = face_recognition.load_image_file("img\image.jpg")
-        listOfImages.append(str(f.name))
-        listOfImagesEncoding.append(face_recognition.face_encodings(unknown_image)[0])
+        # listOfImages.append(str(f.name))
+        temp =""
+        try:
+            temp = face_recognition.face_encodings(unknown_image)[0]
+        except:
+            error = True
+        print(error)
+        # print(temp)
+        if error is False:
+            listOfImages.append(str(f.name))
+            listOfImagesEncoding.append(temp)
 
 
 

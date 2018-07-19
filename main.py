@@ -2,10 +2,11 @@ import shutil
 from pathlib import Path
 
 checkingImage = input("Enter relative path from .py to Image as base: ")
+pathtosearch = input("Enter path for searching: ")
 dirname = input("Enter directory name: ")
 
 
-destdir = Path('img')
+destdir = Path(str(pathtosearch))
 files = [p for p in destdir.iterdir() if p.is_file()]
 # for p in files:
 #     with p.open() as f:

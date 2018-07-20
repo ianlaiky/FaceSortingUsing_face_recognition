@@ -85,25 +85,32 @@ for key in loopDict:
 
 
     for index,encoding in enumerate(listOfImagesEncoding):
+        print("-----------------")
         print("Image: " + str(index))
         totalTrue = 0
         totalFalse = 0
         for trainedEncoding in listOfTrainedEncoding:
 
 
-            results = face_recognition.compare_faces([trainedEncoding], encoding)
-
+            results = face_recognition.face_distance([trainedEncoding], encoding)
             print(results[0])
-            if str(results[0]).lower() == str("True".lower()):
-                print("Yes")
-                totalTrue = int(totalTrue)+1
-
+            if float(results[0]) < 0.45:
+                totalTrue = int(totalTrue) + 1
             else:
-                print("NO")
-                totalFalse = int(totalFalse)+1
+                totalFalse = int(totalFalse) + 1
 
-        print(totalTrue)
-        print(len(listOfTrainedEncoding))
+            # print(results[0])
+            # if str(results[0]).lower() == str("True".lower()):
+            #     print("Yes")
+            #     totalTrue = int(totalTrue)+1
+            #
+            # else:
+            #     print("NO")
+            #     totalFalse = int(totalFalse)+1
+
+        print("Image: " + str(listOfImages[index]))
+        print("Voted yes: "+str(totalTrue)+"/"+str(len(listOfTrainedEncoding))+" | "+str(int(totalTrue)/int(len(listOfTrainedEncoding)))+"%")
+
         if (int(totalTrue)/int(len(listOfTrainedEncoding)))>0.95:
             shutil.move(str(listOfImages[index]), str(loopDict[key].getdirname()))
 

@@ -16,7 +16,9 @@ class Files():
 
     def getdirname(self):
         return self.dirname
+
 pathtosearch = input("Enter path for searching: ")
+
 for loop in range(int(loopTimes)):
 
 

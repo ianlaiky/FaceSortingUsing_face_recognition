@@ -111,6 +111,6 @@ for key in loopDict:
         print("Image: " + str(listOfImages[index]))
         print("Voted yes: "+str(totalTrue)+"/"+str(len(listOfTrainedEncoding))+" | "+str(int(totalTrue)/int(len(listOfTrainedEncoding)))+"%")
 
-        if (int(totalTrue)/int(len(listOfTrainedEncoding)))>0.95:
+        if (int(totalTrue)/int(len(listOfTrainedEncoding))) > 0.70:
             shutil.move(str(listOfImages[index]), str(loopDict[key].getdirname()))
 

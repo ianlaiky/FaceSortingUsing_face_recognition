@@ -46,9 +46,10 @@ for key in loopDict:
 
     listOfTrainedEncoding = []
 
-    for img in trainingFiles:
+    for index,img in enumerate(trainingFiles):
         with img.open() as f:
             print("Processing img: "+str(f.name))
+            print("Image " + str(index) + " of " + str(len(trainingFiles)))
             known_image = face_recognition.load_image_file(str(f.name))
             try:
 
@@ -60,10 +61,11 @@ for key in loopDict:
 
     listOfImages = []
     listOfImagesEncoding = []
-    for img in files:
+    for index,img in enumerate(files):
         with img.open() as f:
             error = False
             print(f.name)
+            print("Image "+str(index)+" of "+str(len(files)))
 
             unknown_image = face_recognition.load_image_file(str(f.name))
             # unknown_image = face_recognition.load_image_file("img\image.jpg")

@@ -96,7 +96,7 @@ for key in loopDict:
 
             results = face_recognition.face_distance([trainedEncoding], encoding)
             print(results[0])
-            if float(results[0]) < 0.45:
+            if float(results[0]) < 0.5:
                 totalTrue = int(totalTrue) + 1
             else:
                 totalFalse = int(totalFalse) + 1

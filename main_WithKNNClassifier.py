@@ -146,17 +146,24 @@ def show_prediction_labels_on_image(img_path, predictions):
 
 
 if __name__ == "__main__":
+    createModel = input("Create new model? y/n: ")
+    unsortedDir = input("Enter directory to sort: ")
+
+
     # STEP 1: Train the KNN classifier and save it to disk
     # Once the model is trained and saved, you can skip this step next time.
 
     #TODO: Uncomment below to train model, comment after clf is created to use the model
-    # print("Training KNN classifier...")
-    # classifier = train("train_dir", model_save_path="trained_knn_model.clf", n_neighbors=2)
-    # print("Training complete!")
+    if str(createModel).lower() == "y":
+        trainDir = input("Enter dir for training: ")
+        print("Training KNN classifier...")
+        classifier = train(str(trainDir), model_save_path="trained_knn_model.clf", n_neighbors=2)
+        print("Training complete!")
 
-    # STEP 2: Using the trained classifier, make predictions for unknown images
-    for image_file in os.listdir("img"):
-        full_file_path = os.path.join("img", image_file)
+        # STEP 2: Using the trained classifier, make predictions for unknown images
+
+    for image_file in os.listdir(str(unsortedDir)):
+        full_file_path = os.path.join(str(unsortedDir), image_file)
 
         print("Looking for faces in {}".format(image_file))
 
